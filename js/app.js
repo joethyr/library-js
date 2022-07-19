@@ -1,3 +1,11 @@
+// enables autofocus for form modal
+var myModal = document.getElementById('myModal')
+var myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', function () {
+  myInput.focus()
+})
+
 let myLibrary = [];
 
 function Book(title, author, pages, read) {
