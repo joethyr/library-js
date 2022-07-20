@@ -18,7 +18,7 @@
         <h1 class=""> My JS Library</h1>
         <div class="col-lg-6 mx-auto">
           <div class="d-flex justify-content-center">
-            <button type="button" class="btn btn-primary btn-lg btn-primary fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-primary btn-lg btn-primary fw-bold shadow" data-bs-toggle="modal" data-bs-target="#myModal">
               New Book
             </button>
           </div>
@@ -28,11 +28,11 @@
   </header>
 
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add Book:</h5>
+          <h5 class="modal-title" id="myModalLabel">Add Book:</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -48,7 +48,7 @@
           <div class="d-flex flex-row">
             <div class="mb-3 d-flex flex-row">
               <label for="pagesBook" class="form-label">Pages:</label>
-              <input type="number" class="form-control mx-3" id="pagesBook">
+              <input type="number" class="form-control ms-2 me-3" id="pagesBook">
             </div>
             <div class="form-check mb-3">
               <input class="form-check-input" type="checkbox" value="" id="readBook">
@@ -70,7 +70,7 @@
   <section>
     <div class="py-5 shadow" style="background-color: #d7cec7;">
       <div class="container">
-          <table class="table table-striped bg-light rounded">
+          <table class="table table-striped bg-light rounded shadow">
             <thead>
               <tr>
                 <th class="fs-3">Title</th>
