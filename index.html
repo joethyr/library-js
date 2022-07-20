@@ -18,8 +18,7 @@
         <h1 class=""> My JS Library</h1>
         <div class="col-lg-6 mx-auto">
           <div class="d-flex justify-content-center">
-            <button type="button" class="btn btn-primary btn-lg btn-primary fw-bold shadow" data-bs-toggle="modal" data-bs-target="#myModal">
-              New Book
+            <button type="button" class="btn btn-primary btn-lg btn-primary fw-bold shadow" data-bs-toggle="modal" data-bs-target="#myModal"> New Book
             </button>
           </div>
         </div>
@@ -59,7 +58,7 @@
           </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary" id="submitBookBtn" onclick="saveBook()">Submit</button>
+              <button type="button" class="btn btn-primary" id="submitBookBtn" onclick="getUserInput()" data-bs-dismiss="modal">Submit</button>
             </div>
           </form>
         </div>
@@ -79,7 +78,7 @@
                 <th class="fs-3">Read</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody class="table-body">
               <tr>
                 <th>Lord of the Rings</th>
                 <td>J.R.R Tolkien</td>

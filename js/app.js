@@ -9,20 +9,6 @@ myModal.addEventListener('shown.bs.modal', () => {
 // add books to library
 const myLibrary = [];
 
-// saves user form inputs
-function saveBook() {
-  const titleBook = document.getElementById('titleBook').value;
-  const authorBook = document.getElementById('authorBook').value;
-  const pagesBook = document.getElementById('pagesBook').value;
-  // const readBook = document.getElementById('readBook');
-  addBookToLibrary(titleBook, authorBook, pagesBook);
-}
-
-function addBookToLibrary(title, author, pages) {
-  let newBook = new Book(title, author, pages);
-  myLibrary.push(newBook);
-}
-
 function Book(title, author, pages) {
   this.title = title;
   this.author = author;
@@ -30,3 +16,29 @@ function Book(title, author, pages) {
   // this.read = read;
 }
 
+// saves user form inputs
+function getUserInput() {
+  const titleBook = document.getElementById('titleBook').value;
+  const authorBook = document.getElementById('authorBook').value;
+  const pagesBook = document.getElementById('pagesBook').value;
+  // const readBook = document.getElementById('readBook');
+  createBook(titleBook, authorBook, pagesBook);
+}
+
+function createBook(title, author, pages) {
+  let newBook = new Book(title, author, pages);
+  myLibrary.push(newBook);
+  addBookToLibrary(newBook);
+}
+
+
+function addBookToLibrary(book) {
+  const list = document.querySelector('.table-body');
+  const row = document.createElement('tr');
+  for (let key in book) {
+    const tableCell = document.createElement('td');
+    tableCell.textContent = book[key];
+    row.appendChild(tableCell);
+  }
+  list.appendChild(row);
+}
