@@ -22,6 +22,9 @@ function getUserInput() {
   const authorBook = document.getElementById('authorBook').value;
   const pagesBook = document.getElementById('pagesBook').value;
   // const readBook = document.getElementById('readBook');
+  if (titleBook === "" || authorBook === "" || pagesBook === "") {
+    return alert("Please fill out all fields.")
+  }
   createBook(titleBook, authorBook, pagesBook);
 }
 
@@ -29,6 +32,12 @@ function createBook(title, author, pages) {
   let newBook = new Book(title, author, pages);
   myLibrary.push(newBook);
   addBookToLibrary(newBook);
+}
+
+function deleteBook(e) {
+  if (e.classList.contains('delete')) {
+    e.parentElement.parentElement.remove();
+  }
 }
 
 function clearFields() {
@@ -49,3 +58,7 @@ function addBookToLibrary(book) {
   clearFields();
 }
 
+// remove book from list
+document.querySelector('.table-body').addEventListener('click', (e => {
+  deleteBook(e.target);
+}))
