@@ -31,6 +31,11 @@ function createBook(title, author, pages) {
   addBookToLibrary(newBook);
 }
 
+function clearFields() {
+  document.getElementById('titleBook').value = "";
+  document.getElementById('authorBook').value = "";
+  document.getElementById('pagesBook').value = "";
+}
 
 function addBookToLibrary(book) {
   const list = document.querySelector('.table-body');
@@ -41,4 +46,6 @@ function addBookToLibrary(book) {
     row.appendChild(tableCell);
   }
   list.appendChild(row);
+  clearFields();
 }
+
