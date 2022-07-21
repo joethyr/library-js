@@ -6,30 +6,59 @@ myModal.addEventListener('shown.bs.modal', () => {
   myInput.focus();
 });
 
+const submitBookBtn = document.getElementById('submitBookBtn');
+
+
 // add books to library
 const myLibrary = [];
 
-function Book(title, author, pages) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  // this.read = read;
+function Book(title, author, pages, read) {
+  this.title = title,
+  this.author = author,
+  this.pages = pages,
+  this.read = read;
 }
 
-// saves user form inputs
-function getUserInput() {
-  const titleBook = document.getElementById('titleBook').value;
+function myAlert(message) {
+  let wrapper = document.createElement('div');
+  wrapper.classList.add('alert', 'alert-danger');
+  wrapper.setAttribute("role", "alert");
+  wrapper.textContent = message;
+  const modalForm = document.getElementById('modal-form');
+  const parent = modalForm.parentNode;
+  parent.insertBefore(wrapper, modalForm);
+}
+
+function mySuccessAlert(message) {
+  let wrapper = document.createElement('div');
+  wrapper.classList.add('alert', 'alert-success');
+  wrapper.setAttribute("role", "alert");
+  wrapper.textContent = message;
+  const modalForm = document.getElementById('modal-form');
+  const parent = modalForm.parentNode;
+  parent.insertBefore(wrapper, modalForm);
+}
+
+
+submitBookBtn.addEventListener("click", () => {
+  if (document.contains(document.querySelector('.alert'))) {
+    document.querySelector('.alert').remove();
+  }
+  let titleBook = document.getElementById('titleBook').value;
   const authorBook = document.getElementById('authorBook').value;
   const pagesBook = document.getElementById('pagesBook').value;
-  // const readBook = document.getElementById('readBook');
+  const readBook = document.getElementById('readBook').checked;
   if (titleBook === "" || authorBook === "" || pagesBook === "") {
-    return alert("Please fill out all fields.")
+    myAlert("Please fill out all form fields.");
+    return false;
   }
-  createBook(titleBook, authorBook, pagesBook);
-}
+  mySuccessAlert('The Book has now been posted!')
+  createBook(titleBook, authorBook, pagesBook, readBook);
+});
 
-function createBook(title, author, pages) {
-  let newBook = new Book(title, author, pages);
+
+function createBook(title, author, pages, read) {
+  let newBook = new Book(title, author, pages, read);
   myLibrary.push(newBook);
   addBookToLibrary(newBook);
 }
@@ -38,12 +67,6 @@ function deleteBook(e) {
   if (e.classList.contains('delete')) {
     e.parentElement.parentElement.remove();
   }
-}
-
-function clearFields() {
-  document.getElementById('titleBook').value = "";
-  document.getElementById('authorBook').value = "";
-  document.getElementById('pagesBook').value = "";
 }
 
 function addBookToLibrary(book) {
@@ -55,10 +78,10 @@ function addBookToLibrary(book) {
     row.appendChild(tableCell);
   }
   list.appendChild(row);
-  clearFields();
+  document.getElementById("modal-form").reset();
 }
 
 // remove book from list
 document.querySelector('.table-body').addEventListener('click', (e => {
   deleteBook(e.target);
-}))
+}));

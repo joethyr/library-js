@@ -35,7 +35,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="modal-form">
             <div class="mb-3">
               <label for="titleBook" class="form-label">Title:</label>
               <input type="text" class="form-control" id="titleBook" required>
@@ -57,8 +57,8 @@
             </div>
           </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" id="submitBookBtn" onclick="getUserInput()" data-bs-dismiss="modal">Submit</button>
+              <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-lg btn-primary" id="submitBookBtn" >Submit</button>
             </div>
           </form>
         </div>
@@ -81,14 +81,14 @@
             </thead>
             <tbody class="table-body">
               <tr>
-                <th>Lord of the Rings</th>
+                <td>Lord of the Rings</td>
                 <td>J.R.R Tolkien</td>
                 <td>523</td>
                 <td><i class="fa-solid fa-check"></i></td>
                 <td><i class="fa-solid fa-trash delete"></i></td>
               </tr>
               <tr>
-                <th>The Grapes of Wrath</th>
+                <td>The Grapes of Wrath</td>
                 <td>John Steinbeck</td>
                 <td>254</td>
                 <td><i class="fa-solid fa-minus"></i></i></td>
