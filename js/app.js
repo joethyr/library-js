@@ -7,6 +7,8 @@ myModal.addEventListener('shown.bs.modal', () => {
 });
 
 const submitBookBtn = document.getElementById('submitBookBtn');
+const newBookBtn = document.getElementById('newBookBtn');
+
 
 
 // add books to library
@@ -39,6 +41,9 @@ function mySuccessAlert(message) {
   parent.insertBefore(wrapper, modalForm);
 }
 
+newBookBtn.addEventListener('click', () => {
+  document.querySelectorAll('.alert').forEach((elem) => elem.parentNode.removeChild(elem));
+});
 
 submitBookBtn.addEventListener("click", () => {
   if (document.contains(document.querySelector('.alert'))) {
