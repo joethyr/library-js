@@ -71,6 +71,7 @@ function createBook(title, author, pages, read) {
 
 function deleteBook(e) {
   if (e.classList.contains('delete')) {
+    myLibrary.splice([e.parentElement.parentElement.getAttribute('array-position')], 1);
     e.parentElement.parentElement.remove();
   }
 }
@@ -78,6 +79,7 @@ function deleteBook(e) {
 function addBookToLibrary(book) {
   const list = document.querySelector('.table-body');
   const row = document.createElement('tr');
+  row.setAttribute("array-position", `${myLibrary.length-1}`);
   let counter = 0;
   for (let key in book) {
     let tableCell = document.createElement('td');
