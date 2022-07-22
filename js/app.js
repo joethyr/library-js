@@ -10,7 +10,6 @@ const submitBookBtn = document.getElementById('submitBookBtn');
 const newBookBtn = document.getElementById('newBookBtn');
 
 
-
 // add books to library
 const myLibrary = [];
 
@@ -41,6 +40,7 @@ function mySuccessAlert(message) {
   parent.insertBefore(wrapper, modalForm);
 }
 
+// removes any additional alert containers
 newBookBtn.addEventListener('click', () => {
   document.querySelectorAll('.alert').forEach((elem) => elem.parentNode.removeChild(elem));
 });
@@ -57,7 +57,7 @@ submitBookBtn.addEventListener("click", () => {
     myAlert("Please fill out all form fields.");
     return false;
   }
-  mySuccessAlert('The Book has now been posted!')
+  mySuccessAlert('The Book has now been posted!');
   createBook(titleBook, authorBook, pagesBook, readBook);
 });
 
@@ -65,8 +65,9 @@ submitBookBtn.addEventListener("click", () => {
 function createBook(title, author, pages, read) {
   let newBook = new Book(title, author, pages, read);
   myLibrary.push(newBook);
-  addBookToLibrary(newBook);
+  addBookToLibrary(myLibrary[myLibrary.length-1]);
 }
+
 
 function deleteBook(e) {
   if (e.classList.contains('delete')) {
@@ -77,11 +78,32 @@ function deleteBook(e) {
 function addBookToLibrary(book) {
   const list = document.querySelector('.table-body');
   const row = document.createElement('tr');
+  let counter = 0;
   for (let key in book) {
-    const tableCell = document.createElement('td');
-    tableCell.textContent = book[key];
+    let tableCell = document.createElement('td');
+    if (key === "read") {
+      const readBtn = document.createElement('button');
+      if (book[key] == true) {
+        readBtn.textContent = "Read";
+        tableCell.appendChild(readBtn);
+      } else {
+        readBtn.textContent = "Unread";
+        tableCell.appendChild(readBtn);
+      }
+    } else {
+      tableCell.textContent = book[key];
+    }
+    tableCell.classList.add(`bookValue-${counter}`);
+    counter++;
     row.appendChild(tableCell);
   }
+  // APPEND DELETE BUTTON HERE
+  const tableCell = document.createElement('td');
+  const deleteIcon = document.createElement('i');
+  deleteIcon.classList.add('fa-solid', 'fa-trash', 'delete');
+  tableCell.appendChild(deleteIcon);
+
+  row.appendChild(tableCell);
   list.appendChild(row);
   document.getElementById("modal-form").reset();
 }
@@ -90,3 +112,4 @@ function addBookToLibrary(book) {
 document.querySelector('.table-body').addEventListener('click', (e => {
   deleteBook(e.target);
 }));
+

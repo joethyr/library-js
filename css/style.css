@@ -1,3 +1,7 @@
 #pagesBook {
  width: 100px;
 }
+
+tr > td:first-child {
+  font-weight: bold;
+}
