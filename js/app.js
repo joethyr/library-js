@@ -20,19 +20,9 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-function myAlert(message) {
+function myAlert(message, alert) {
   let wrapper = document.createElement('div');
-  wrapper.classList.add('alert', 'alert-danger');
-  wrapper.setAttribute("role", "alert");
-  wrapper.textContent = message;
-  const modalForm = document.getElementById('modal-form');
-  const parent = modalForm.parentNode;
-  parent.insertBefore(wrapper, modalForm);
-}
-
-function mySuccessAlert(message) {
-  let wrapper = document.createElement('div');
-  wrapper.classList.add('alert', 'alert-success');
+  wrapper.classList.add('alert', `${alert}`);
   wrapper.setAttribute("role", "alert");
   wrapper.textContent = message;
   const modalForm = document.getElementById('modal-form');
@@ -45,6 +35,7 @@ newBookBtn.addEventListener('click', () => {
   document.querySelectorAll('.alert').forEach((elem) => elem.parentNode.removeChild(elem));
 });
 
+
 submitBookBtn.addEventListener("click", () => {
   if (document.contains(document.querySelector('.alert'))) {
     document.querySelector('.alert').remove();
@@ -54,10 +45,10 @@ submitBookBtn.addEventListener("click", () => {
   const pagesBook = document.getElementById('pagesBook').value;
   const readBook = document.getElementById('readBook').checked;
   if (titleBook === "" || authorBook === "" || pagesBook === "") {
-    myAlert("Please fill out all form fields.");
+    myAlert("Please fill out all form fields.", "alert-danger");
     return false;
   }
-  mySuccessAlert('The Book has now been posted!');
+  myAlert('The Book has now been posted!', "alert-success");
   createBook(titleBook, authorBook, pagesBook, readBook);
 });
 
@@ -66,6 +57,12 @@ function createBook(title, author, pages, read) {
   let newBook = new Book(title, author, pages, read);
   myLibrary.push(newBook);
   addBookToLibrary(myLibrary[myLibrary.length-1]);
+
+  document.querySelectorAll('.readBtn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      toggleReadBtn(e.target);
+    });
+  });
 }
 
 
@@ -80,25 +77,25 @@ function addBookToLibrary(book) {
   const list = document.querySelector('.table-body');
   const row = document.createElement('tr');
   row.setAttribute("array-position", `${myLibrary.length-1}`);
-  let counter = 0;
   for (let key in book) {
     let tableCell = document.createElement('td');
     if (key === "read") {
       const readBtn = document.createElement('button');
       if (book[key] == true) {
+        readBtn.classList.add('readBtn', 'btn', 'btn-success');
         readBtn.textContent = "Read";
         tableCell.appendChild(readBtn);
       } else {
+        readBtn.classList.add('readBtn', 'btn', 'btn-warning');
         readBtn.textContent = "Unread";
         tableCell.appendChild(readBtn);
       }
     } else {
       tableCell.textContent = book[key];
     }
-    tableCell.classList.add(`bookValue-${counter}`);
-    counter++;
     row.appendChild(tableCell);
   }
+
   // APPEND DELETE BUTTON HERE
   const tableCell = document.createElement('td');
   const deleteIcon = document.createElement('i');
@@ -115,3 +112,20 @@ document.querySelector('.table-body').addEventListener('click', (e => {
   deleteBook(e.target);
 }));
 
+
+function toggleReadBtn(e) {
+  // remove button class and update with different class
+  let bookKey =  e.parentElement.parentElement.getAttribute('array-position');
+  // let bookReadValue = myLibrary[e.parentElement.parentElement.getAttribute('array-position')]['read'];
+  if (myLibrary[bookKey]['read'] == true) {
+    myLibrary[bookKey]['read'] = false;
+    e.classList.remove('btn-success');
+    e.classList.add('btn-warning');
+    e.textContent = "Unread";
+  } else {
+    myLibrary[bookKey]['read'] = true;
+    e.classList.remove('btn-warning');
+    e.classList.add('btn-success');
+    e.textContent = "Read";
+  }
+}
